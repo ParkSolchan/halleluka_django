@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # dispatch() 메소드를 사용하기 위함
 from django.core.exceptions import PermissionDenied
+from django.utils.text import slugify
 
 # Create your views here.
 
@@ -72,7 +73,30 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView) :
         current_user = self.request.user
         if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
             form.instance.author = current_user
-            return super(PostCreate, self).form_valid(form)
+            response = super(PostCreate, self).form_valid(form)
+
+                # POST 방식으로 전달된 정보 중에서 name이 tags_str 인 input값을 가져옴
+            tags_str = self.request.POST.get('tags_str')
+            if tags_str :
+                tags_str = tags_str.strip()
+
+                tags_str = tags_str.replace(',', ';')
+                tags_list = tags_str.split(';')
+
+                for t in tags_list :
+                    t = t.strip()
+                    # 이 값을 name으로 갖는 태그가 있다면 가져오고, 없다면 새로만든다 (upsert)
+                    # 첫번째 인자 (Tag) : Tag 모델의 인스턴스
+                    # 두번째 인자 (is_tag_create) : 새로 생성되었는지 나타내는 bool값
+                    tag, is_tag_created = Tag.objects.get_or_create(name = t)
+                    if(is_tag_created) :
+                        # 새로 만들어진 태그라면 slug값을 생성해주어야함
+                        tag.slug = slugify(t, allow_unicode=True)
+                        tag.save()
+                    # self.object : 지금 생성된 포스트
+                    self.object.tags.add(tag)
+
+            return response
         else :
             return redirect('/blog/')
 
