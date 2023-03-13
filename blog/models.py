@@ -3,6 +3,7 @@ import os
 
 class Post(models.Model) :
     title = models.CharField(max_length=30)
+    hook_text = models.CharField(max_length=100, blank=True)
     content = models.TextField()
 
     # blank=True :  해당 항목은 필수값이 아니다는 선언
