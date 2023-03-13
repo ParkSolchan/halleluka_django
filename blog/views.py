@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 # models.py 에 선언된 Post 객체를 임포트
 from .models import Post, Category, Tag
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+# dispatch() 메소드를 사용하기 위함
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 
@@ -73,6 +75,21 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView) :
             return super(PostCreate, self).form_valid(form)
         else :
             return redirect('/blog/')
+
+class PostUpdate(LoginRequiredMixin, UpdateView) :
+    model = Post
+    fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category', 'tags']
+    # CreateView, UpdateView 는 모델명_form.html 를 찾아서 사용하기 때문에 수종으로 바꿔주어야한다.
+    template_name = 'blog/post_update_form.html'
+
+    def dispatch(self, request, *args, **kwargs) :
+        # 방문자(request.user) 는 로그인한 상태여야 함
+        # self.get_object() 는 Post.objects.get(pk=pk) 와 같은 역할
+        if request.user.is_authenticated and request.user == self.get_object().author :
+            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
+        else :
+            # 권한없음 에러 ( 403 에러 출력 )
+            raise PermissionDenied
 
 def category_page(request, slug) :
     if slug == 'no_category' :
