@@ -4,6 +4,8 @@ class Post(models.Model) :
     title = models.CharField(max_length=30)
     content = models.TextField()
 
+    # blank=True :  해당 항목은 필수값이 아니다는 선언
+    head_image = models.ImageField(upload_to='blog/image/%Y/%m/%d/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     #author : 추후 작성 예정
