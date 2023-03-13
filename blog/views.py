@@ -38,6 +38,12 @@ class PostList(ListView):
 class PostDetail(DetailView) :
     model = Post
 
+    def get_context_data(self, **kwargs) :
+        context = super(PostDetail, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Post.objects.filter(category=None).count()
+
+        return context
 
 # def single_post_page(request, pk) :
 #     # .get(pk=pk) : 괄호안의 조건을 만족하는 Post레코드를 가져오는 함수

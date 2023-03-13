@@ -94,9 +94,9 @@ class TestView(TestCase) :
         self.assertIn('아직 게시물이 없습니다', main_area.text)
 
     def test_post_detail(self) :
-        self.assertEqual(post_001.get_absolute_url(), '/blog/1/')
+        self.assertEqual(self.post_001.get_absolute_url(), '/blog/1/')
 
-        response = self.client.get(post_001.get_absolute_url())
+        response = self.client.get(self.post_001.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         soup = bs(response.content, 'html.parser')
 
@@ -104,13 +104,15 @@ class TestView(TestCase) :
         # self.assertIn('Blog', navbar.text)
         # self.assertIn('About Me', navbar.text)
         self.navbar_test(soup)
+        self.category_card_test(soup)
 
-        self.assertIn(post_001.title, soup.title.text)
+        self.assertIn(self.post_001.title, soup.title.text)
 
         main_area = soup.find('div', id='main-area')
         post_area = main_area.find('div', id='post-area')
-        self.assertIn(post_001.title, post_area.text)
+        self.assertIn(self.post_001.title, post_area.text)
+        self.assertIn(self.category_programming.name, post_area.text)
 
         self.assertIn(self.user_luka.username.upper(), post_area.text)
 
-        self.assertIn(post_001.content, post_area.text)
+        self.assertIn(self.post_001.content, post_area.text)
