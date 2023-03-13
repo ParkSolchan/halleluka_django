@@ -8,9 +8,11 @@ class TestView(TestCase) :
     def setUp(self) :
         self.client = Client()
         self.user_luka = User.objects.create_user(username='luka',
-        password='ksm0108!!')
+        password='1234')
         self.user_thisisfiness = User.objects.create_user(username='thisisfiness2',
-        password='ksm0108!!')
+        password='1234')
+        self.user_luka.is_staff = True
+        self.user_luka.save()
 
         self.category_programming = Category.objects.create(name='programming', slug='programming')
         self.category_music = Category.objects.create(name='music', slug='music')
@@ -175,8 +177,13 @@ class TestView(TestCase) :
         response = self.client.get('/blog/create_post/')
         self.assertNotEqual(response.status_code, 200)
 
-        # 로그인 상태일 경우
-        response = self.client.login(username='luka', password='ksm0108!!')
+        # 권한이 staff 미만일 경우
+        self.client.login(username='thisisfiness2', password='1234')
+        response = self.client.get('/blog/create_post/')
+        self.assertNotEqual(response.status_code, 200)
+
+        # 로그인 상태일 경우 & 권한이 staff 이상일 경우
+        response = self.client.login(username='luka', password='1234')
 
         response = self.client.get('/blog/create_post/')
         self.assertEqual(response.status_code, 200)
