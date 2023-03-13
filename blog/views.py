@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 # models.py 에 선언된 Post 객체를 임포트
-from .models import Post
+from .models import Post, Category
 from django.views.generic import ListView, DetailView
 
 # Create your views here.
@@ -15,6 +15,12 @@ class PostList(ListView):
     # template_name = 'blog/index.html'
     # pk값을 오름차순으로 보여주라는 명령어
     ordering = '-pk'
+
+    def get_context_data(self, **kwargs) :
+        context = super(PostList, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Post.objects.filter(category=None).count()
+        return context
     
 # def index(request) :
 #     # order_by를 사용하면 pk값의 역순으로 정렬됨
@@ -40,7 +46,7 @@ class PostDetail(DetailView) :
 
 #     return render(
 #         request,
-#         'blog/single_post_page.html',
+#         'blog/single_post_page.html',()
 #         {
 #             'post': post,
 #         }
