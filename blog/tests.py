@@ -169,3 +169,31 @@ class TestView(TestCase) :
         self.assertIn(self.tag_hello.name, post_area.text)
         self.assertNotIn(self.tag_python.name, post_area.text)
         self.assertNotIn(self.tag_python_kor.name, post_area.text)
+
+    def test_create_post(self) :
+        # 미로그인 상태일 경우
+        response = self.client.get('/blog/create_post/')
+        self.assertNotEqual(response.status_code, 200)
+
+        # 로그인 상태일 경우
+        response = self.client.login(username='luka', password='ksm0108!!')
+
+        response = self.client.get('/blog/create_post/')
+        self.assertEqual(response.status_code, 200)
+        soup = bs(response.content, 'html.parser')
+
+        self.assertEqual('Create Post - Blog', soup.title.text)
+        main_area = soup.find('div', id='main-area')
+        self.assertIn('Create New Post', main_area.text)
+
+        self.client.post(
+            '/blog/create_post/',
+            {
+                'title': 'Post form 만들기',
+                'content': 'Post form 페이지를 만듭시당.',
+            }
+        )
+        self.assertEqual(Post.objects.count(), 4)
+        last_post = Post.objects.last()
+        self.assertEqual(last_post.title, 'Post form 만들기')
+        self.assertEqual(last_post.author.username, 'luka')
