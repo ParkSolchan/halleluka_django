@@ -12,6 +12,8 @@ class Category(models.Model) :
     def __str__(self) :
         return self.name
 
+    def get_absolute_url(self) :
+        return f'/blog/category/{self.slug}/'
     # Category의 복수형을 Categorys라고 쓰는것을 수정해주는 코드
     # 복수형을 직접 지정
     class Meta:

@@ -11,5 +11,7 @@ urlpatterns = [
     # url이 /blog/인 경우 PostList 클래스에서 처리하도록 호출
     path('', views.PostList.as_view()),
     # url이 'blog/정수/' 형태일 경우 PostDetail클래스를 이용하도록
-    path('<int:pk>/', views.PostDetail.as_view())
+    path('<int:pk>/', views.PostDetail.as_view()),
+
+    path('category/<str:slug>/', views.category_page),
 ]
