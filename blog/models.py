@@ -66,3 +66,16 @@ class Post(models.Model) :
 
     def get_content_markdown(self) :
         return markdown(self.content)
+
+class Comment(models.Model) :
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True) # 처음 생성될때의 시간을 저장
+    modified_at = models.DateTimeField(auto_now=True) # 저장 될때의 시간을 저장
+
+    def __str__ (self) :    # 작성자 명과 content 내용을 출력하는 __str__ 함수
+        return f'{self.author}::{self.content}'
+
+    def get_absolute_url(self) :
+        return f'{self.post.get_absolute_url()}#comment-{self.pk}'
