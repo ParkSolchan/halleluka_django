@@ -106,6 +106,16 @@ class PostUpdate(LoginRequiredMixin, UpdateView) :
     # CreateView, UpdateView 는 모델명_form.html 를 찾아서 사용하기 때문에 수종으로 바꿔주어야한다.
     template_name = 'blog/post_update_form.html'
 
+    def get_context_data(self, **kwargs) :
+        context = super(PostUpdate, self).get_context_data()
+        # Post 레코드 (self.object로 가져온)에 tags가 존재하면 이 tags의 name을 리스트 형태로 담는다.
+        if self.object.tags.exists() :
+            tags_str_list = list()
+            for t in self.object.tags.all() :
+                tags_str_list.append(t.name)
+            context['tags_str_default'] = '; '.join(tags_str_list)
+        return context
+
     def dispatch(self, request, *args, **kwargs) :
         # 방문자(request.user) 는 로그인한 상태여야 함
         # self.get_object() 는 Post.objects.get(pk=pk) 와 같은 역할
@@ -114,6 +124,25 @@ class PostUpdate(LoginRequiredMixin, UpdateView) :
         else :
             # 권한없음 에러 ( 403 에러 출력 )
             raise PermissionDenied
+    
+    def form_valid(self, form) :
+        response = super(PostUpdate, self).form_valid(form)
+        self.object.tags.clear()
+
+        tags_str = self.request.POST.get('tags_str')
+        if tags_str :
+            tags_str = tags_str.strip()
+            tags_str = tags_str.replace(',', ';')
+            tags_list = tags_str.split(';')
+
+            for t in tags_list :
+                t = t.strip()
+                tag, is_tag_created = Tag.objects.get_or_create(name=t)
+                if is_tag_created :
+                    tag.slug = slugify(t, allow_unicode=True)
+                    tag.save()
+                self.object.tags.add(tag)
+        return response
 
 def category_page(request, slug) :
     if slug == 'no_category' :
