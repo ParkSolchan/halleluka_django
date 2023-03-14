@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_extensions",
 
+    "crispy_forms",
+    "crispy_bootstrap4",
+
     "blog",
     "single_pages",
 ]
@@ -130,3 +133,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # 이미지 업로드를 위한 ImageField를 사용
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
+# Crispy-forms를 사용하기 위함
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
