@@ -209,3 +209,13 @@ def new_comment(request, pk) :
                 return redirect(post.get_absolute_url())
         else :
             raise PermissionDenied
+
+def delete_comment(request, pk) :
+    # deleteView 를 사용하면 진짜 삭제할것인지 확인하는 페이지로 이동하기 때문에 페이지 이동을 하지 않기 위해서 모달형태로 구현
+    comment = get_object_or_404(Comment, pk=pk)
+    post = comment.post
+    if request.user.is_authenticated and request.user == comment.author :
+        comment.delete()
+        return redirect(post.get_absolute_url())
+    else :
+        raise PermissionDenied
