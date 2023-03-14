@@ -23,6 +23,9 @@ class PostList(ListView):
     # pk값을 오름차순으로 보여주라는 명령어
     ordering = '-pk'
 
+    # 페이지 네이션 - 한번에 몇개를 보여줄지
+    paginate_by = 5
+
     def get_context_data(self, **kwargs) :
         context = super(PostList, self).get_context_data()
         context['categories'] = Category.objects.all()
