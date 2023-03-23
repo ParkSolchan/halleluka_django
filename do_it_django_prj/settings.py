@@ -52,9 +52,11 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "selenium",
 
     "blog",
     "single_pages",
+    "no_spoiler",
 ]
 
 MIDDLEWARE = [

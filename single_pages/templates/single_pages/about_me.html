@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'single_pages/css/about_me.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/1f212db822.js" crossorigin="anonymous"></script>
+    <style>
+        .card-body {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
 </head>
 <body>
     {% include 'blog/navbar.html' %}
@@ -28,28 +33,22 @@
                     <ul>
                         <li>WORK EXPERIENCE</li>
                         <ul>
-                            <li>크고 좋은 회사 - 빅데이터 분석(2019.10 ~ )</li>
-                            <li>작고 좋은 회사 (2019.10 ~ )</li>
+                            <li>그린컴퓨터아카데미(국비) - JAVA & SPRING 웹 프로그래머 과정 수료 <br/> ( 2022.01 ~ 2022.06 )</li>
+                            <li>SI업체 - 웹, 안드로이드 프론트엔드, 백엔드업무 (2022.07 ~ 2022.12 )</li>
                         </ul>
                         <li>EDUCATION</li>
                         <ul>
-                            <li>공학박사, 장고공학(Django Engineering), 파이썬대학교 (2010.03~2015.09)</li>
-                            <li>공학박사, 장고공학(Django Engineering), 파이썬대학교 (2010.03~2015.09)</li>
-                            <li>공학박사, 장고공학(Django Engineering), 파이썬대학교 (2010.03~2015.09)</li>
-                        </ul>
-                        <li>PUBLISH</li>
-                        <ul>
-                            <li>DO IT DJANGO, 이지스 퍼블리싱 (2020)</li>
+                            <li>생물학과 졸업, 경성대학교 ( ~ 2022.03 )</li>
                         </ul>
                     </ul>
                 </div>
                 <div class="col-lg-4">
-                    <img class="img-fluid" src="{% static 'single_pages/images/profile.JPG' %}" alt="">
+                    <img class="img-fluid" src="{% static 'single_pages/images/profile-img.jpeg' %}" alt="">
                 </div>
             </div>
         </div>
     </section>
-    <section class="bg-light margin-for-footer">
+    <section class="margin-for-footer">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -59,28 +58,22 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card" data-toggle="modal" data-target="#pycon2017">
-                        <img class="card-img-top" src="{% static 'single_pages/images/sample-img-1.jpg' %}">
+                        <img class="card-img-top" src="{% static 'single_pages/images/friendsourcing-sample-img.png' %}">
                         <div class="card-body">
-                            <h5 class="card-title">파이썬으로 통계업무 자동화하기 [PYCON 2017]</h5>
-                            <p>Python, Django, Pandas, python-docx로 통계업무 자동화한 내용을 파이콘에서 발표했습니다.</p>
+                            <h5 class="card-title">FriendSourcing</h5>
+                            <p>
+                                지도, 사용자 방문 경험 중심의 SNS 서비스
+                                Kakao map api 를 적용후 개인의 경험에 따라 후기와 평점, 사진을 공유하는 소셜 네트워킹 서비스
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card" data-toggle="modal" data-target="#pycon2018">
-                        <img class="card-img-top" src="{% static 'single_pages/images/sample-img-1.jpg' %}">
+                        <img class="card-img-top" src="{% static 'single_pages/images/stackus-sample-img.png' %}">
                         <div class="card-body">
-                            <h5 class="card-title">파이썬으로 통계업무 자동화하기 [PYCON 2017]</h5>
-                            <p>Python, Django, Pandas, python-docx로 통계업무 자동화한 내용을 파이콘에서 발표했습니다.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card" data-toggle="modal" data-target="#pycon2019">
-                        <img class="card-img-top" src="{% static 'single_pages/images/sample-img-1.jpg' %}">
-                        <div class="card-body">
-                            <h5 class="card-title">파이썬으로 통계업무 자동화하기 [PYCON 2017]</h5>
-                            <p>Python, Django, Pandas, python-docx로 통계업무 자동화한 내용을 파이콘에서 발표했습니다.</p>
+                            <h5 class="card-title">StackUs</h5>
+                            <p>공시생, 수험생, 자격증 공부나 학교, 학원과 과외등에 사용할 수 있는 문제풀이 웹 애플리케이션</p>
                         </div>
                     </div>
                 </div>
