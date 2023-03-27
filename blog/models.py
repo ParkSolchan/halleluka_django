@@ -73,7 +73,6 @@ class Post(models.Model) :
         else :
             return f'https://doitdjango.com/avatar/id/1469/be9027120fdb9b94/svg/{self.author.email}'
         
-
 class Comment(models.Model) :
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

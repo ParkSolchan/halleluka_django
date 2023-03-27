@@ -1,3 +1,16 @@
+body {
+    background: url('/static/single_pages/images/background-img.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
 .margin-for-footer {
     margin-bottom: 130px;
+}
+section {
+    margin-bottom: 50px;
+}
+.card {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.card:hover {
+    background-color: rgb(255, 255, 255);
 }

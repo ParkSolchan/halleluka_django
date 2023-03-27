@@ -1,10 +1,17 @@
 body {
-    background: url('/static/single_pages/images/background-img.png') no-repeat center center fixed;
+    background: url('/static/single_pages/images/background-img-2.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
 section {
-    margin-bottom: 150px;
+    margin-bottom: 50px;
+}
+
+h1, h2, h3, h4, h5, h6, p, div {
+    font-family: "Pretendard" !important;
+}
+h1.bold, h2.bold, h3.bold, h4.bold, h5.bold, h6.bold, p.bold, div.bold {
+    font-family: "Pretendard" !important;
 }
 
 .card {
@@ -12,4 +19,10 @@ section {
 }
 .card:hover {
     background-color: rgb(255, 255, 255);
+}
+
+.text-smoke {
+    color: #c0c0c0;
+    font-weight: 500;
+    letter-spacing: 0;
 }

@@ -7,19 +7,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>about developer 할렐루카</title>
     <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'single_pages/css/about_me.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/1f212db822.js" crossorigin="anonymous"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <style>
+        .card {
+            cursor: pointer;
+        }
         .card-body {
             background-color: rgba(255, 255, 255, 0.8);
+        }
+        .card-img-top {
+            height: 300px;
+        }
+        .no-url {
+            text-decoration: underline;
+            color: #d9d9d9;
+            font-size: 12px;
+            font-style: italic;
+        }
+        p.date {
+            font-size: 12px;
+            font-style: italic;
+            color: #c1c1c1;
+            text-align: right;
         }
     </style>
 </head>
 <body>
     {% include 'blog/navbar.html' %}
     
-    <section>
+    <section id="app">
         <div class="container mt-4">
             <div class="row">
                 <div class="col-lg-8">
@@ -43,7 +62,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-4">
-                    <img class="img-fluid" src="{% static 'single_pages/images/profile-img.jpeg' %}" alt="">
+                    <img class="img-fluid" src="{% static 'single_pages/images/profile-img.jpeg' %}" alt="프로필 사진">
                 </div>
             </div>
         </div>
@@ -57,7 +76,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card" data-toggle="modal" data-target="#pycon2017">
+                    <div class="card" data-toggle="modal" data-target="#friendsourcing">
                         <img class="card-img-top" src="{% static 'single_pages/images/friendsourcing-sample-img.png' %}">
                         <div class="card-body">
                             <h5 class="card-title">FriendSourcing</h5>
@@ -65,15 +84,17 @@
                                 지도, 사용자 방문 경험 중심의 SNS 서비스
                                 Kakao map api 를 적용후 개인의 경험에 따라 후기와 평점, 사진을 공유하는 소셜 네트워킹 서비스
                             </p>
+                            <p class="date">2022.06</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card" data-toggle="modal" data-target="#pycon2018">
+                    <div class="card" data-toggle="modal" data-target="#stackus">
                         <img class="card-img-top" src="{% static 'single_pages/images/stackus-sample-img.png' %}">
                         <div class="card-body">
                             <h5 class="card-title">StackUs</h5>
                             <p>공시생, 수험생, 자격증 공부나 학교, 학원과 과외등에 사용할 수 있는 문제풀이 웹 애플리케이션</p>
+                            <p class="date">2022.04</p>
                         </div>
                     </div>
                 </div>
@@ -86,11 +107,11 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="pycon2017" tabindex="-1" role="dialog" aria-labelledby="pycon2017ModalLabel" aria-hidden="true">
+    <div class="modal fade" id="friendsourcing" tabindex="-1" role="dialog" aria-labelledby="friendsourcingModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="pycon2017ModalLabel">파이썬으로 통계업무 자동화하기</h5>
+                    <h5 class="modal-title" id="friendsourcingModalLabel">FriendSourcing</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -98,10 +119,21 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-7">
-                            <img class="img-fluid" src="{% static 'single_pages/images/sample-img-1.jpg' %}">
+                            <img class="img-fluid" src="{% static 'single_pages/images/friendsourcing-sample-img.png' %}">
                         </div>
                         <div class="col-lg-5">
-                            <p>Python, Django, Pandas, python-docx로 통계업무 자동화한 내용을 파이콘에서 발표했습니다.</p>
+                            <p>
+                                지도, 사용자 방문 경험 중심의 SNS 서비스
+                                Kakao map api 를 적용후 개인의 경험에 따라 후기와 평점, 사진을 공유하는 소셜 네트워킹 서비스
+                            </p>
+                            <hr/>
+                            <p>
+                                Github : <a href="https://github.com/ParkSolchan/FriendSourcing" target="_blank"><small>https://github.com/ParkSolchan/FriendSourcing</small></a>
+                            </p>
+                            <hr/>
+                            <p>
+                                URL : <p class="no-url">배포되지 않았습니다.</p>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -111,7 +143,50 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="stackus" tabindex="-1" role="dialog" aria-labelledby="stackusModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="stackusModalLabel">StackUs</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <img class="img-fluid" src="{% static 'single_pages/images/stackus-sample-img.png' %}">
+                        </div>
+                        <div class="col-lg-5">
+                            <p>
+                                공시생, 수험생, 자격증 공부나 학교, 학원과 과외등에 사용할 수 있는 문제풀이 웹 애플리케이션
+                            </p>
+                            <hr/>
+                            <p>
+                                Github : <a href="https://github.com/ParkSolchan/StackUs" target="_blank"><small>https://github.com/ParkSolchan/StackUs</small></a>
+                            </p>
+                            <hr/>
+                            <p>
+                                URL : <p class="no-url">배포되지 않았습니다.</p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data: {
+                title : 'vue 타이틀'
+            }
+        })
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
